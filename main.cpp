@@ -32,7 +32,7 @@ void Draw()
      std::cout << "-";
   }
   std::cout << std::endl;
-
+///////////////////////////////////////
   for (int h = 0; h < height; h++)
   {
       for (int w = 0; w < width; w++)
@@ -40,6 +40,10 @@ void Draw()
           if (w == 0 || w == width -1)
           {
               std::cout << '|';
+          }
+          else if(h == y && w == x)
+          {
+              std::cout << "#";
           }
           else
           {
