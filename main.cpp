@@ -64,6 +64,52 @@ void Draw()
 
 }
 
+void Input()
+{
+  if(_kbhit())
+  {
+    switch(_getch())
+    {
+      case 'a':
+        dir = LEFT;
+        break;
+      case 'd':
+        dir = RIGHT;
+        break;
+      case 'w':
+        dir = UP;
+        break;
+      case 's':
+        dir = DOWN;
+        break;
+      case 'x':
+        GameOver = true;
+        break;
+        ///Search "kbhit arrow keys"
+    }
+  }
+}
+
+void Logic()
+{
+  switch(dir)
+  {
+    case LEFT:
+      x--;
+      break;
+    case RIGHT:
+      x++;
+      break;
+    case UP:
+      y--;
+      break;
+    case DOWN:
+      y++;
+      break;
+    default:
+      break;
+  }
+}
 
 
 
@@ -75,9 +121,11 @@ int main()
 Setup();
 
 while(!GameOver)
-{
+{   
     Draw();
-    sleep(1);
+    Input();
+    Logic();
+    sleep(1/2);
 }
 
 
