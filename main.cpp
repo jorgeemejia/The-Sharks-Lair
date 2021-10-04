@@ -10,8 +10,19 @@ const int height = 10;
 int x;
 int y;
 int score;
+int mine_x [] = {4, 2, 8};
+int mine_y []= {2, 7, 3};
 enum eDirection{STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
+
+////MAYBE
+// have a bool, obs_printed
+// set it to false, once all have been printed, make it true
+// put all that in the else if
+// that way you can have the else just have " "
+
+
+
 
 void Setup()
 {
@@ -22,17 +33,20 @@ void Setup()
   GameOver = false;
 }
 
+
+
 void Draw()
 {
 
   system("cls");
+
 
   for (int w = 0; w < width; w++)
   {
      std::cout << "-";
   }
   std::cout << std::endl;
-///////////////////////////////////////
+///////////////////////////////////////////////
   for (int h = 0; h < height; h++)
   {
       for (int w = 0; w < width; w++)
@@ -47,13 +61,32 @@ void Draw()
           }
           else
           {
-              std::cout << " ";
+            for(int i = 0; i < 3; i++)
+            {
+              if(mine_x[i] == w && mine_y[i] == h)
+              {
+                std::cout << 'X';
+              }
+              else
+              {
+                std::cout << " ";
+              }
+            }
+
+
+
+
+
           }
+      
+      
+      
+      //////////////END OF ELSE
       }
       std::cout << std::endl;
   }
   
-
+/////////////////////////////////////////////
   for (int w = 0; w < width; w++)
   {
      std::cout << "-";
@@ -109,6 +142,21 @@ void Logic()
     default:
       break;
   }
+
+
+for(int i = 0; i < 3; i++)
+{
+  if(x == mine_x[i] && y == mine_y[i])
+  {
+    GameOver = true;
+  }
+}
+  if(x == 0 || x == width - 1)
+  {
+    GameOver = true;
+  }
+
+
 }
 
 
