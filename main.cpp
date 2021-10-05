@@ -90,6 +90,8 @@ void Draw()
   }
   std::cout << std::endl;
 
+  std::cout << "\tSCORE:" << score << std::endl;
+
 
 
 }
@@ -141,16 +143,20 @@ void Logic()
   }
 
 
-for(int i = 0; i < 8; i++)
-{
-  if(x == mines_x[i] && y == mines_y[i])
+  for(int i = 0; i < 8; i++)
   {
-    GameOver = true;
+    if(x == mines_x[i] && y == mines_y[i])
+    {
+      GameOver = true;
+    }
   }
-}
   if(x == 0 || x == width - 1)
   {
     GameOver = true;
+  }
+  if(y == 0)
+  {
+    score = score + 100;
   }
 
 
