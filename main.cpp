@@ -10,8 +10,8 @@ const int height = 10;
 int x;
 int y;
 int score;
-int mine_x [] = {4, 2, 8};
-int mine_y []= {2, 7, 3};
+int mines_x [] = {4, 2, 8, 12, 16, 18, 21, 25};
+int mines_y []=  {2, 7, 3,  1,  4,  5,  8,  9};
 enum eDirection{STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
 
@@ -61,22 +61,19 @@ void Draw()
           }
           else
           {
-            for(int i = 0; i < 3; i++)
-            {
-              if(mine_x[i] == w && mine_y[i] == h)
-              {
-                std::cout << 'X';
-              }
-              else
-              {
+               bool last_mine = false;
+               for(int i = 0; i < 8; i++)
+               {
+                 if(mines_x[i] == w && mines_y[i] == h) 
+                 {
+                   std::cout << 'O';
+                   last_mine = true;
+                 } 
+               }
+               if (!last_mine)
+               {
                 std::cout << " ";
-              }
-            }
-
-
-
-
-
+               }
           }
       
       
@@ -144,9 +141,9 @@ void Logic()
   }
 
 
-for(int i = 0; i < 3; i++)
+for(int i = 0; i < 8; i++)
 {
-  if(x == mine_x[i] && y == mine_y[i])
+  if(x == mines_x[i] && y == mines_y[i])
   {
     GameOver = true;
   }
@@ -173,7 +170,8 @@ while(!GameOver)
     Draw();
     Input();
     Logic();
-    sleep(1/2);
+    sleep(9/10);
+    //sleep(1);
 }
 
 
