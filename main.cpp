@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <thread>
 #include <chrono>
+#include <vector>
 
 bool GameOver;
 const int width = 30;
@@ -10,10 +11,12 @@ const int height = 10;
 int x;
 int y;
 int score;
-int mines_x [] = {4, 2, 8, 12, 16, 18, 21, 25};
-int mines_y []=  {2, 7, 3,  1,  4,  5,  8,  9};
+std::vector<int> mines_x;
+std::vector<int> mines_y;
 enum eDirection{STOP = 0, LEFT, RIGHT, UP, DOWN};
 eDirection dir;
+
+bool level_complete; 
 
 ////MAYBE
 // have a bool, obs_printed
@@ -31,6 +34,14 @@ void Setup()
   y = height - 1;
   score = 0;
   GameOver = false;
+}
+
+void LevelOne()
+{
+
+mines_x.push_back(4);
+mines_y.push_back(2);
+
 }
 
 
@@ -154,9 +165,10 @@ void Logic()
   {
     GameOver = true;
   }
-  if(y == 0)
+  if (y == 0)
   {
     score = score + 100;
+
   }
 
 
@@ -170,9 +182,11 @@ int main()
 {
 
 Setup();
+LevelOne();
 
 while(!GameOver)
 {   
+
     Draw();
     Input();
     Logic();
