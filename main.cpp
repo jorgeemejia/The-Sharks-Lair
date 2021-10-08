@@ -39,8 +39,21 @@ void Setup()
 void LevelOne()
 {
 
-mines_x.push_back(4);
-mines_y.push_back(2);
+// int x[2] = {2, 4};
+// int y[2] = {2, 4};
+
+// mines_x.insert(mines_x.end(), std::begin(x), std::end(x));
+// mines_y.insert(mines_y.end(), std::begin(y), std::end(y));
+mines_x.push_back(3);
+mines_y.push_back(3);
+
+
+}
+void LevelTwo()
+{
+
+mines_x.push_back(6);
+mines_y.push_back(6);
 
 }
 
@@ -168,8 +181,14 @@ void Logic()
   if (y == 0)
   {
     score = score + 100;
+    x = width/2;
+    y = height - 1;
 
   }
+  // if( score == 100)
+  // {
+  //   LevelTwo();
+  // }
 
 
 }
@@ -183,6 +202,18 @@ int main()
 
 Setup();
 LevelOne();
+
+while(!GameOver && score != 100)
+{   
+
+    Draw();
+    Input();
+    Logic();
+    sleep(9/10);
+    //sleep(1);
+}
+
+LevelTwo();
 
 while(!GameOver)
 {   
@@ -198,3 +229,12 @@ while(!GameOver)
 
 return 0;
 }
+
+
+
+////while !GameOver
+
+
+
+
+
