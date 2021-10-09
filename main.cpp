@@ -25,6 +25,20 @@ bool level_complete;
 // that way you can have the else just have " "
 
 
+void TitleScreen()
+{
+std::cout << "   ___  _              _    _     _         _ "      << std::endl;      
+std::cout << "  / __>| |_  ___  _ _ | |__|/___ | |   ___ <_> _ _  "<< std::endl;  
+std::cout << "  \\__ \\| . |<_> || '_>| / / <_-< | |_ <_> || || '_> "<< std::endl;  
+std::cout << "  <___/|_|_|<___||_|  |_\\_\\ /__/ |___|<___||_||_| } " << std::endl;  
+// for(int x = 0; x < 10; x++)
+// {
+//   std::cout << "/\\";
+// }
+
+///Have a shark fin move around, start at one
+
+}
 
 
 void Setup()
@@ -55,6 +69,11 @@ void LevelTwo()
 mines_x.push_back(6);
 mines_y.push_back(6);
 
+}
+void LevelThree()
+{
+mines_x.push_back(15);
+mines_y.push_back(3);
 }
 
 
@@ -199,6 +218,8 @@ void Logic()
 
 int main()
 {
+TitleScreen();
+sleep(1);
 
 Setup();
 LevelOne();
@@ -215,7 +236,17 @@ while(!GameOver && score != 100)
 
 LevelTwo();
 
-while(!GameOver)
+while(!GameOver && score != 200)
+{
+    Draw();
+    Input();
+    Logic();
+    sleep(9/10);
+}
+
+LevelThree();
+
+while(!GameOver && score != 300)
 {   
 
     Draw();
