@@ -27,16 +27,21 @@ bool level_complete;
 
 void TitleScreen()
 {
-std::cout << "   ___  _              _    _     _         _ "      << std::endl;      
-std::cout << "  / __>| |_  ___  _ _ | |__|/___ | |   ___ <_> _ _  "<< std::endl;  
-std::cout << "  \\__ \\| . |<_> || '_>| / / <_-< | |_ <_> || || '_> "<< std::endl;  
-std::cout << "  <___/|_|_|<___||_|  |_\\_\\ /__/ |___|<___||_||_| } " << std::endl;  
-// for(int x = 0; x < 10; x++)
-// {
-//   std::cout << "/\\";
-// }
+  //Big font, patorjk
 
-///Have a shark fin move around, start at one
+// for (int x = 0; x < 5; x++)
+// {
+
+
+std::cout << "   _____ _                _    _       _           _       " << std::endl;
+std::cout << "  / ____| |              | |  ( )     | |         (_)      " << std::endl;
+std::cout << " | (___ | |__   __ _ _ __| | _|/ ___  | |     __ _ _ _ __  " << std::endl;
+std::cout << "  \\___ \\| '_ \\ / _` | '__| |/ / / __| | |    / _` | | '__| " << std::endl;
+std::cout << "  ____) | | | | (_| | |  |   <  \\__ \\ | |___| (_| | | |    " << std::endl;
+std::cout << " |_____/|_| |_|\\__,_|_|  |_|\\_\\ |___/ |______\\__,_|_|_|    " << std::endl;
+                                                          
+                                                          
+
 
 }
 
@@ -50,6 +55,18 @@ void Setup()
   GameOver = false;
 }
 
+void LevelOneScreen()
+{ 
+std::cout <<"  _                    _    ____                      "<< std::endl;
+std::cout <<" | |                  | |  / __ \\                    "<< std::endl;
+std::cout <<" | |     _____   _____| | | |  | |_ __   ___          "<< std::endl;
+std::cout <<" | |    / _ \\ \\ / / _ \\ | | |  | | '_ \\ / _ \\    "<< std::endl;
+std::cout <<" | |___|  __/\\ V /  __/ | | |__| | | | |  __/        "<< std::endl;
+std::cout <<" |______\\___| \\_/ \\___|_|  \\____/|_| |_|\\___|    "<< std::endl;
+                                             
+}
+
+
 void LevelOne()
 {
 
@@ -61,8 +78,27 @@ void LevelOne()
 mines_x.push_back(3);
 mines_y.push_back(3);
 
+//just do a for loop with rand getting numbers and pushbacking them into vector.
+
 
 }
+
+void LevelTwoScreen()
+{
+
+std::cout << " _                    _   _______                 " << std::endl;
+std::cout << " | |                  | | |__   __|               " << std::endl;
+std::cout << " | |     _____   _____| |    | |_      _____      " << std::endl;
+std::cout << " | |    / _ \\ \\ / / _ \\ |    | \\ \\ /\\ / / _ \\     " << std::endl;
+std::cout << " | |___|  __/\\ V /  __/ |    | |\\ V  V / (_) |    " << std::endl;
+std::cout << " |______\\___| \\_/ \\___|_|    |_| \\_/\\_/ \\___/     " << std::endl;
+                                              
+
+
+}
+
+
+
 void LevelTwo()
 {
 
@@ -70,6 +106,19 @@ mines_x.push_back(6);
 mines_y.push_back(6);
 
 }
+
+void LevelThreeScreen()
+{
+
+std::cout << "   _                    _   _______ _                      " << std::endl;
+std::cout << "  | |                  | | |__   __| |                     " << std::endl; 
+std::cout << "  | |     _____   _____| |    | |  | |__  _ __ ___  ___    " << std::endl;
+std::cout << "  | |    / _ \\ \\ / / _ \\ |    | |  | '_ \\| '__/ _ \\/ _ \\   " << std::endl;
+std::cout << "  | |___|  __/\\ V /  __/ |    | |  | | | | | |  __/  __/   " << std::endl;
+std::cout << "  |______\\___| \\_/ \\___|_|    |_|  |_| |_|_|  \\___|\\___|   " << std::endl;
+                                                       
+}
+
 void LevelThree()
 {
 mines_x.push_back(15);
@@ -133,7 +182,7 @@ void Draw()
   }
   std::cout << std::endl;
 
-  std::cout << "\tSCORE:" << score << std::endl;
+  std::cout << "\tLEVEL:" << score << std::endl;
 
 
 
@@ -218,10 +267,14 @@ void Logic()
 
 int main()
 {
+system("cls");
 TitleScreen();
 sleep(1);
 
 Setup();
+system("cls");
+LevelOneScreen();
+sleep(1);
 LevelOne();
 
 while(!GameOver && score != 100)
@@ -233,8 +286,13 @@ while(!GameOver && score != 100)
     sleep(9/10);
     //sleep(1);
 }
-
+if (!GameOver)
+{
+system("cls");
+LevelTwoScreen();
+sleep(1);
 LevelTwo();
+}
 
 while(!GameOver && score != 200)
 {
@@ -244,7 +302,13 @@ while(!GameOver && score != 200)
     sleep(9/10);
 }
 
+if (!GameOver)
+{
+system("cls");
+LevelThreeScreen();
+sleep(1);
 LevelThree();
+}
 
 while(!GameOver && score != 300)
 {   
@@ -260,12 +324,6 @@ while(!GameOver && score != 300)
 
 return 0;
 }
-
-
-
-////while !GameOver
-
-
 
 
 
