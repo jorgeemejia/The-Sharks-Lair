@@ -49,7 +49,7 @@ std::cout << " |_____/|_| |_|\\__,_|_|  |_|\\_\\ |___/ |______\\__,_|_|_|    " <
 void Setup()
 {
   dir = STOP;
-  x = width/2;
+  x = width/2;  ///15, 9
   y = height - 1;
   score = 0;
   GameOver = false;
@@ -70,16 +70,15 @@ std::cout <<" |______\\___| \\_/ \\___|_|  \\____/|_| |_|\\___|    "<< std::endl
 void LevelOne()
 {
 
-// int x[2] = {2, 4};
-// int y[2] = {2, 4};
+for (int x = 0; x < 3; x++)
+{
+  int mine_x = rand () % (width - 1) + 1;
+  int mine_y = rand () % (height - 3)  + 1;
 
-// mines_x.insert(mines_x.end(), std::begin(x), std::end(x));
-// mines_y.insert(mines_y.end(), std::begin(y), std::end(y));
-mines_x.push_back(3);
-mines_y.push_back(3);
+  mines_x.push_back(mine_x);
+  mines_y.push_back(mine_y);
 
-//just do a for loop with rand getting numbers and pushbacking them into vector.
-
+}
 
 }
 
@@ -102,9 +101,15 @@ std::cout << " |______\\___| \\_/ \\___|_|    |_| \\_/\\_/ \\___/     " << std::
 void LevelTwo()
 {
 
-mines_x.push_back(6);
-mines_y.push_back(6);
+for (int x = 0; x < 3; x++)
+{
+  int mine_x = rand () % (width - 1) + 1;
+  int mine_y = rand () % (height - 3)  + 1;
 
+  mines_x.push_back(mine_x);
+  mines_y.push_back(mine_y);
+
+}
 }
 
 void LevelThreeScreen()
@@ -121,8 +126,15 @@ std::cout << "  |______\\___| \\_/ \\___|_|    |_|  |_| |_|_|  \\___|\\___|   " 
 
 void LevelThree()
 {
-mines_x.push_back(15);
-mines_y.push_back(3);
+  for (int x = 0; x < 3; x++)
+{
+  int mine_x = rand () % (width - 1) + 1;
+  int mine_y = rand () % (height - 3)  + 1;
+
+  mines_x.push_back(mine_x);
+  mines_y.push_back(mine_y);
+
+}
 }
 
 
