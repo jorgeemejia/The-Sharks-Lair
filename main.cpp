@@ -201,21 +201,29 @@ void Logic()
       GameOver = true;
     }
   }
-  if(x == 0 || x == width - 1)
+  if(x == 0 || x == width - 1 || y > height)
   {
     GameOver = true;
   }
-  if (y == 0)
+  if (y < 0)
   {
     score = score + 100;
     x = width/2;
     y = height - 1;
 
   }
-  // if( score == 100)
-  // {
-  //   LevelTwo();
-  // }
+
+  if (GameOver)
+  {
+    system("cls");
+    GameOverScreen();
+  }
+  if (score == 300)
+  {
+    system("cls");
+    YouWinScreen();
+  }
+  
 
 
 }
@@ -228,7 +236,7 @@ int main()
 {
 system("cls");
 TitleScreen();
-sleep(1);
+sleep(2);
 
 Setup();
 system("cls");
@@ -282,8 +290,6 @@ while(!GameOver && score != 300)
     sleep(9/10);
     //sleep(1);
 }
-
-
 
 return 0;
 }
