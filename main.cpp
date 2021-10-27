@@ -4,8 +4,10 @@
 #include <thread>
 #include <chrono>
 #include <vector>
-
+#include <cstdlib>
+#include <ctime>
 #include "titlescreens.h"
+
 
 bool GameOver;
 const int width = 30;
@@ -17,15 +19,8 @@ std::vector<int> mines_x;
 std::vector<int> mines_y;
 enum eDirection{STOP = 0, LEFT, RIGHT, UP, DOWN,};
 eDirection dir;
-
+int difficulty_multiplier = 10;
 bool level_complete; 
-
-////MAYBE
-// have a bool, obs_printed
-// set it to false, once all have been printed, make it true
-// put all that in the else if
-// that way you can have the else just have " "
-
 
 void Setup()
 {
@@ -38,113 +33,93 @@ void Setup()
 
 void LevelOne()
 {
+  srand((unsigned int)time(NULL));
+  for (int x = 0; x < difficulty_multiplier; x++)
+  {
+    int mine_x = rand () % (width - 1) + 1;
+    int mine_y = rand () % (height - 3)  + 1;
 
-for (int x = 0; x < 3; x++)
-{
-  int mine_x = rand () % (width - 1) + 1;
-  int mine_y = rand () % (height - 3)  + 1;
-
-  mines_x.push_back(mine_x);
-  mines_y.push_back(mine_y);
-
+    mines_x.push_back(mine_x);
+    mines_y.push_back(mine_y);
+  }
 }
-
-}
-
-
-
-
 
 void LevelTwo()
 {
+  srand((unsigned int)time(NULL));
+  for (int x = 0; x < difficulty_multiplier; x++)
+  {
+    int mine_x = rand () % (width - 1) + 1;
+    int mine_y = rand () % (height - 3)  + 1;
 
-for (int x = 0; x < 3; x++)
-{
-  int mine_x = rand () % (width - 1) + 1;
-  int mine_y = rand () % (height - 3)  + 1;
+    mines_x.push_back(mine_x);
+    mines_y.push_back(mine_y);
 
-  mines_x.push_back(mine_x);
-  mines_y.push_back(mine_y);
-
+  }
 }
-}
-
-
 
 void LevelThree()
 {
-  for (int x = 0; x < 3; x++)
-{
-  int mine_x = rand () % (width - 1) + 1;
-  int mine_y = rand () % (height - 3)  + 1;
+  srand(time(NULL));
+  for (int x = 0; x < difficulty_multiplier; x++)
+  {
+    int mine_x = rand () % (width - 1) + 1;
+    int mine_y = rand () % (height - 3)  + 1;
 
-  mines_x.push_back(mine_x);
-  mines_y.push_back(mine_y);
-
+    mines_x.push_back(mine_x);
+    mines_y.push_back(mine_y);
+  }
 }
-}
-
-
 
 void Draw()
 {
 
   system("cls");
 
+  for (int w = 0; w < width; w++)
+  {
+    std::cout << "-";
+  }
+  std::cout << std::endl;
+  for (int h = 0; h < height; h++)
+  {
+    for (int w = 0; w < width; w++)
+    {
+      if (w == 0 || w == width -1)
+      {
+        std::cout << '|';
+      }
+      else if(h == y && w == x)
+      {
+        std::cout << "#";
+      }
+      else
+      {
+        bool last_mine = false;
+        for(int i = 0; i < 30; i++)
+        {
+          if(mines_x[i] == w && mines_y[i] == h) 
+          {
+            std::cout << 'O';
+            last_mine = true;
+          } 
+        }
+        if (!last_mine)
+        {
+               std::cout << " ";
+        }
+      }
+    }
+    std::cout << std::endl;
+  }
 
   for (int w = 0; w < width; w++)
   {
-     std::cout << "-";
-  }
-  std::cout << std::endl;
-///////////////////////////////////////////////
-  for (int h = 0; h < height; h++)
-  {
-      for (int w = 0; w < width; w++)
-      {
-          if (w == 0 || w == width -1)
-          {
-              std::cout << '|';
-          }
-          else if(h == y && w == x)
-          {
-              std::cout << "#";
-          }
-          else
-          {
-               bool last_mine = false;
-               for(int i = 0; i < 8; i++)
-               {
-                 if(mines_x[i] == w && mines_y[i] == h) 
-                 {
-                   std::cout << 'O';
-                   last_mine = true;
-                 } 
-               }
-               if (!last_mine)
-               {
-                std::cout << " ";
-               }
-          }
-      
-      
-      
-      //////////////END OF ELSE
-      }
-      std::cout << std::endl;
-  }
-  
-/////////////////////////////////////////////
-  for (int w = 0; w < width; w++)
-  {
-     std::cout << "-";
+    std::cout << "-";
   }
   std::cout << std::endl;
 
   std::cout << "\tLEVEL:" << score << std::endl;
-
-
-
 }
 
 void Input()
@@ -168,7 +143,6 @@ void Input()
       case 'x':
         GameOver = true;
         break;
-        ///Search "kbhit arrow keys"
     }
   }
 }
@@ -194,7 +168,7 @@ void Logic()
   }
 
 
-  for(int i = 0; i < 8; i++)
+  for(int i = 0; i < 30; i++)
   {
     if(x == mines_x[i] && y == mines_y[i])
     {
@@ -210,7 +184,6 @@ void Logic()
     score = score + 100;
     x = width/2;
     y = height - 1;
-
   }
 
   if (GameOver)
@@ -223,73 +196,63 @@ void Logic()
     system("cls");
     YouWinScreen();
   }
-  
-
-
 }
-
-
-
 
 
 int main()
 {
-system("cls");
-TitleScreen();
-sleep(2);
+  system("cls");
+  TitleScreen();
+  sleep(2);
 
-Setup();
-system("cls");
-LevelOneScreen();
-sleep(1);
-LevelOne();
+  Setup();
+  system("cls");
+  LevelOneScreen();
+  sleep(1);
+  LevelOne();
 
-while(!GameOver && score != 100)
-{   
-
+  while(!GameOver && score != 100)
+  {   
     Draw();
     Input();
     Logic();
     sleep(9/10);
-    //sleep(1);
-}
-if (!GameOver)
-{
-system("cls");
-LevelTwoScreen();
-sleep(1);
-LevelTwo();
-}
+  }
+  if (!GameOver)
+  {
+    system("cls");
+    LevelTwoScreen();
+    sleep(1);
+    LevelTwo();
+  }
 
-dir = STOP;
+  dir = STOP;
 
-while(!GameOver && score != 200)
-{
+  while(!GameOver && score != 200)
+  {
     Draw();
     Input();
     Logic();
     sleep(9/10);
-}
+  }
 
-if (!GameOver)
-{
-system("cls");
-LevelThreeScreen();
-sleep(1);
-LevelThree();
-}
+  if (!GameOver)
+  {
+    system("cls");
+    LevelThreeScreen();
+    sleep(1);
+    LevelThree();
+  }
 
-dir = STOP;
+  dir = STOP;
 
-while(!GameOver && score != 300)
-{   
-
+  while(!GameOver && score != 300)
+  {    
     Draw();
     Input();
     Logic();
     sleep(9/10);
-    //sleep(1);
-}
+  }
 
 return 0;
 }
